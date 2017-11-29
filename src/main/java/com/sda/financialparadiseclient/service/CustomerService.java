@@ -21,7 +21,7 @@ public class CustomerService {
     private RestTemplate restTemplate;
 
     public Map<String, String> addCustomer(Customer customer) throws Exception{
-        URI uri = new URI("http://localhost:8081/addCustomer");
+        URI uri = new URI("http://localhost:8081/customers/add");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();

@@ -34,6 +34,8 @@ public class CustomerController {
         return "customers";
     }
 
+
+
     @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
     public String addUser(@ModelAttribute Customer customer,
                           ModelMap modelMap){

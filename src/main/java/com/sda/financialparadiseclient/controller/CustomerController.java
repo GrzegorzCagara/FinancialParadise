@@ -56,6 +56,13 @@ public class CustomerController {
         return "redirect:/customers/find/all";
     }
 
+    @GetMapping("/update")
+    public String updateCustomer(@RequestParam("customerId") int id, Model model) throws Exception {
+        Customer customer = customerService.findCustomerById(id);
+        model.addAttribute(customer);
+        return "customer-form";
+    }
+
 
 
     //    @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)

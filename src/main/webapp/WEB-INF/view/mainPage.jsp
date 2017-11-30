@@ -14,8 +14,8 @@
 <body>
     <div class="top-line">
         <div class="top-left-side"><span class="logo"><a href = "/">Financial Paradise</a></span></div>
-        <div class="top-center-side"><a href ="/customers"><span class="button">Admin panel</span></a></div>
-        <div class="top-right-side"><a href="/login">Login</a> / <a href="/showformforcustomer">Register</a></div>
+        <div class="top-center-side"><a href ="/customers/find/all"><span class="button">Admin panel</span></a></div>
+        <div class="top-right-side"><a href="/login">Login</a> / <a href="/customers/register">Register</a></div>
     </div>
 
     <div class="content">

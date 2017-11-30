@@ -15,8 +15,8 @@
 
 <div class="top-line">
     <div class="top-left-side"><span class="logo"><a href = "/">Financial Paradise</a></span></div>
-    <div class="top-center-side"><a href ="/customers"><span class="button">Admin panel</span></a></div>
-    <div class="top-right-side"><a href="/login">Login</a> / <a href="/addcustomer">Register</a></div>
+    <div class="top-center-side"><a href ="/customers/find/all"><span class="button">Admin panel</span></a></div>
+    <div class="top-right-side"><a href="/login">Login</a> / <a href="/customers/register">Register</a></div>
 </div>
 
 <div class="content">
@@ -30,20 +30,20 @@
         <th>Email</th>
         <th>Password</th>
     </tr>
-    <c:forEach var="tempClient" items="${customers}">
+    <c:forEach var="tempCustomer" items="${customers}">
         <tr>
-            <c:url var="updateLink" value="/admin/updateClient">
-                <c:param name="clientId" value="${tempClient.id}"/>
+            <c:url var="updateLink" value="/customers/update">
+                <c:param name="customerId" value="${tempCustomer.id}"/>
             </c:url>
 
             <c:url var="deleteLink" value="/admin/deleteClient">
-                <c:param name="clientId" value="${tempClient.id}"/>
+                <c:param name="customerId" value="${tempCustomer.id}"/>
             </c:url>
-            <td>${tempClient.firstName}</td>
-            <td>${tempClient.lastName}</td>
-            <td>${tempClient.pesel}</td>
-            <td>${tempClient.email}</td>
-            <td>${tempClient.password}</td>
+            <td>${tempCustomer.firstName}</td>
+            <td>${tempCustomer.lastName}</td>
+            <td>${tempCustomer.pesel}</td>
+            <td>${tempCustomer.email}</td>
+            <td>${tempCustomer.password}</td>
             <td><a href="${updateLink}">Update</a>
                 |
                 <a href="${deleteLink}"

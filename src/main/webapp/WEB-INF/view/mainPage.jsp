@@ -1,5 +1,8 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Financial Paradise</title>
@@ -10,7 +13,13 @@
 </head>
 <body>
     <div class="top-line">
-        <div class="header-text">Financial Paradise</div>
+        <div class="top-left-side"><span class="logo"><a href = "/">Financial Paradise</a></span></div>
+        <div class="top-center-side"><a href ="/customers"><span class="button">Admin panel</span></a></div>
+        <div class="top-right-side"><a href="/login">Login</a> / <a href="/showformforcustomer">Register</a></div>
+    </div>
+
+    <div class="content">
+
     </div>
 
     <footer>

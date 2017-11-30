@@ -8,9 +8,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -37,8 +39,25 @@ public class CustomerController {
     }
 
 
+    @GetMapping("/showformforcustomer")
+    public String showForForAdd(Model model){
+        Customer customer = new Customer();
+        model.addAttribute("customer", customer);
+        return "customer-form";
+    }
 
-//    @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
+    @PostMapping("/addcustomer")
+    public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer,BindingResult bindingResult) throws Exception {
+        if(bindingResult.hasErrors()){
+            return "customer-form";
+        }
+        customerService.addCustomer(customer);
+        return "redirect:/customers";
+    }
+
+
+
+    //    @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
 //    public String addUser(@ModelAttribute("firstName") String firstName,
 //                          @ModelAttribute("lastName") String lastName,
 //                          @ModelAttribute("pesel")  String pesel,
@@ -66,18 +85,5 @@ public class CustomerController {
 //
 //        return "redirect:/customers";
 //    }
-
-    @GetMapping("/showformforcustomer")
-    public String showForForAdd(Model model){
-        Customer customer = new Customer();
-        model.addAttribute("customer", customer);
-        return "customer-form";
-    }
-
-    @PostMapping("/addcustomer")
-    public String saveCustomer(@ModelAttribute("customer") Customer customer) throws Exception {
-        customerService.addCustomer(customer);
-        return "redirect:/customers";
-    }
 
 }

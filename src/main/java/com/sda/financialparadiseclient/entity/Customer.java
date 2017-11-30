@@ -2,10 +2,11 @@ package com.sda.financialparadiseclient.entity;
 
 
 
+import com.sda.financialparadiseclient.validation.PeselValidator;
 import lombok.Getter;
 import lombok.Setter;
 
-
+import javax.validation.constraints.NotNull;
 
 
 @Getter
@@ -14,11 +15,11 @@ public class Customer {
 
 
     private Integer id;
-
+    @NotNull
     private String firstName;
 
     private String lastName;
-    
+    @PeselValidator
     private String pesel;
     private String email;
     private String password;

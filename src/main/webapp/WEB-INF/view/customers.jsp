@@ -40,15 +40,16 @@
 </table>
 
 <p> Add new customer:</p><br>
-<form action="/addCustomer" method="post">
+<form:form action="/addCustomer" method="post">
     <div align="center">
         First Name: <input name="firstName" type="text"/><br>
         Last Name: <input name="lastName" type="text"/><br>
         Pesel: <input name="pesel" type="text"/><br>
+        <form:errors path="pesel"/>
         Email: <input name="email" type="text"/><br>
         Password: <input name="password" type="text"/><br>
         <input type="submit">
     </div>
-</form>
+</form:form>
 </body>
 </html>

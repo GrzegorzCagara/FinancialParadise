@@ -1,5 +1,7 @@
 package com.sda.financialparadiseclient.entity;
 
+
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +18,7 @@ public class Customer {
     private String firstName;
 
     private String lastName;
+    
     private String pesel;
     private String email;
     private String password;

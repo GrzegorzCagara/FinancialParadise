@@ -1,6 +1,7 @@
 package com.sda.financialparadiseclient.controller;
 
 import com.sda.financialparadiseclient.entity.Customer;
+import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,6 +24,9 @@ public class CustomerController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    CustomerService customerService;
+
     @GetMapping("/customers")
     public String users(ModelMap modelMap){
         //method 1
@@ -37,19 +41,29 @@ public class CustomerController {
 
 
     @RequestMapping(value = "/addCustomer", method = RequestMethod.POST)
-    public String addUser(@ModelAttribute Customer customer,
-                          ModelMap modelMap){
-        String sqluser =
-                String.format("INSERT INTO customer (first_name, last_name, pesel, email, password) VALUES ('%s', '%s', '%s', '%s', '%s')",
-                        customer.getFirstName(), customer.getLastName(), customer.getPesel(), customer.getEmail(), customer.getPassword());
-        jdbcTemplate.execute(sqluser);
+    public String addUser(@ModelAttribute("firstName") String firstName,
+                          @ModelAttribute("lastName") String lastName,
+                          @ModelAttribute("pesel") String pesel,
+                          @ModelAttribute("email") String email,
+                          @ModelAttribute("password") String password,
+                          ModelMap modelMap) throws Exception {
+//        String sqluser =
+//                String.format("INSERT INTO customer (first_name, last_name, pesel, email, password) VALUES ('%s', '%s', '%s', '%s', '%s')",
+//                        customer.getFirstName(), customer.getLastName(), customer.getPesel(), customer.getEmail(), customer.getPassword());
+//        jdbcTemplate.execute(sqluser);
 //        String sqlrole =
 //                String.format("INSERT INTO user_roles (username, role) VALUES ('%s', '%s')",
 //                        username, "ROLE_ADMIN");
 //        jdbcTemplate.execute(sqlrole);
         List<Customer> customerList = jdbcTemplate.query("select * from customer",
                 new BeanPropertyRowMapper<>(Customer.class));
-        modelMap.addAttribute("customers", customerList);
+        System.out.println("firstName: " + firstName + "/ pesel: " + pesel);
+        try {
+            customerService.addCustomer(firstName, lastName, pesel, email, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        modelMap.addAttribute("customers", customerList);
 
         return "redirect:/customers";
     }

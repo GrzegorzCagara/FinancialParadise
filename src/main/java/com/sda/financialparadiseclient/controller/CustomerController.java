@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequestMapping("/customers")
 public class CustomerController {
 
     @Autowired
@@ -27,7 +28,7 @@ public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-    @GetMapping("/customers")
+    @GetMapping("/find/all")
     public String users(ModelMap modelMap){
         //method 1
         //List<Map<String, Object>> userlist =  jdbcTemplate.queryForList("select * from users");
@@ -39,20 +40,20 @@ public class CustomerController {
     }
 
 
-    @GetMapping("/showformforcustomer")
+    @GetMapping("/register")
     public String showForForAdd(Model model){
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         return "customer-form";
     }
 
-    @PostMapping("/addcustomer")
+    @PostMapping("/add")
     public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer,BindingResult bindingResult) throws Exception {
         if(bindingResult.hasErrors()){
             return "customer-form";
         }
         customerService.addCustomer(customer);
-        return "redirect:/customers";
+        return "redirect:/customers/find/all";
     }
 
 

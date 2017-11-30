@@ -1,11 +1,8 @@
 package com.sda.financialparadiseclient.entity;
 
 import com.sda.financialparadiseclient.Currency;
-
 import lombok.Getter;
 import lombok.Setter;
-
-
 import java.math.BigDecimal;
 
 
@@ -17,8 +14,6 @@ public class Account {
     private Integer id;
     private BigDecimal balance;
     private Currency currency;
-
-
     private Customer customer;
 
     public Account() {

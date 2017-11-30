@@ -13,7 +13,7 @@
 
     <div id="container">
         <h3>Save Customer</h3>
-        <form:form action="addcustomer" modelAttribute="customer" method="POST">
+        <form:form action="add" modelAttribute="customer" method="POST">
             <form:hidden path="id"/>
             <table>
                 <tbody>
@@ -50,7 +50,7 @@
 
         <div style="clear: both;"></div>
         <p>
-            <a href="${pageCOntext.request.contextPath}/customers">Back to List</a>
+            <a href="${pageCOntext.request.contextPath}/customers/find/all">Back to List</a>
         </p>
     </div>
 </body>

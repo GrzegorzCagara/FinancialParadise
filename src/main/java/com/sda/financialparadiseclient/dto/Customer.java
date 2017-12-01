@@ -1,8 +1,9 @@
-package com.sda.financialparadiseclient.entity;
+package com.sda.financialparadiseclient.dto;
 
 import com.sda.financialparadiseclient.validation.PeselValidator;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,15 +12,14 @@ import javax.validation.constraints.Size;
 @Setter
 public class Customer {
 
-
     private Integer id;
     @NotNull
     private String firstName;
     @NotNull
     private String lastName;
     @NotNull
-    @PeselValidator
     @Size(min = 11, max = 11)
+    @PeselValidator
     private String pesel;
     @NotNull
     private String email;

@@ -20,8 +20,7 @@
 </div>
 
 <div class="content">
-<input type="button" value="Add Customer" onclick="window.location.href='addClient'; return false;"
-       class="add-button"/>
+    <div class="top-center-side"><a href ="/customers/register"><span class="button">Add Customer</span></a></div>
 <table>
     <tr>
         <th>First Name</th>

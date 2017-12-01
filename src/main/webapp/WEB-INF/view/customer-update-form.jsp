@@ -26,7 +26,7 @@
 
     <div id="container">
         <h3>Save Customer</h3>
-        <form:form action="/customers/add" modelAttribute="customer" method="POST">
+        <form:form action="/customers/update/customer" modelAttribute="customer" method="PUT">
             <form:hidden path="id"/>
             <table>
                 <tbody>

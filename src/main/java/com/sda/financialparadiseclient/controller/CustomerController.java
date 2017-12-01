@@ -1,6 +1,6 @@
 package com.sda.financialparadiseclient.controller;
 
-import com.sda.financialparadiseclient.entity.Customer;
+import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -60,7 +60,16 @@ public class CustomerController {
     public String updateCustomer(@RequestParam("customerId") int id, Model model) throws Exception {
         Customer customer = customerService.findCustomerById(id);
         model.addAttribute(customer);
-        return "customer-form";
+        return "customer-update-form";
+    }
+
+    @PutMapping("/update/customer")
+    public String sendUpdatedCustomer(@Valid @ModelAttribute("customer") Customer customer,BindingResult bindingResult) throws Exception {
+        if(bindingResult.hasErrors()){
+            return "redirect:/update";
+        }
+        customerService.updateCustomer(customer);
+        return "redirect:/customers/find/all";
     }
 
 

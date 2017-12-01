@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -29,9 +30,13 @@ public class CustomerService {
         restTemplate.delete(financialServiceUrl+ id);
     }
 
+    public List<Customer> findAllCustomers() throws Exception {
+        List<Customer> customers = restTemplate.getForObject(financialServiceUrl + "list", List.class);
+        return customers;
+    }
+
     public Customer findCustomerById(int id) throws Exception {
-        URI uri = new URI(financialServiceUrl  + id);
-        Customer customer = restTemplate.getForObject(uri, Customer.class);
+        Customer customer = restTemplate.getForObject(financialServiceUrl  + id, Customer.class);
         return customer;
     }
 }

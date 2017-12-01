@@ -29,12 +29,11 @@ public class CustomerController {
     CustomerService customerService;
 
     @GetMapping("/find/all")
-    public String users(ModelMap modelMap){
+    public String users(ModelMap modelMap) throws Exception {
         //method 1
         //List<Map<String, Object>> userlist =  jdbcTemplate.queryForList("select * from users");
 
-        List<Customer> userList = jdbcTemplate.query("select * from customer",
-                new BeanPropertyRowMapper<>(Customer.class));
+        List<Customer> userList = customerService.findAllCustomers();
         modelMap.addAttribute("customers", userList);
         return "customers";
     }

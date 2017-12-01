@@ -7,6 +7,9 @@
 <head>
     <jsp:include page="../resources/css/styles.css"/>
     <jsp:include page="../resources/js/scripts.js"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="/js/scripts.js"></script>
     <title>All clients</title>
@@ -20,7 +23,7 @@
 </div>
 
 <div class="content">
-    <div class="top-center-side"><a href ="/customers/register"><span class="button">Add Customer</span></a></div>
+    <div class="top-center-side"><a href ="/customers/customer"><span class="btn btn-success">Add Customer</span></a></div>
 <table>
     <tr>
         <th>First Name</th>
@@ -31,22 +34,21 @@
     </tr>
     <c:forEach var="tempCustomer" items="${customers}">
         <tr>
-            <c:url var="updateLink" value="/customers/update">
-                <c:param name="customerId" value="${tempCustomer.id}"/>
-            </c:url>
 
-            <c:url var="deleteLink" value="/admin/deleteClient">
-                <c:param name="customerId" value="${tempCustomer.id}"/>
-            </c:url>
             <td>${tempCustomer.firstName}</td>
             <td>${tempCustomer.lastName}</td>
             <td>${tempCustomer.pesel}</td>
             <td>${tempCustomer.email}</td>
             <td>${tempCustomer.password}</td>
-            <td><a href="${updateLink}">Update</a>
-                |
-                <a href="${deleteLink}"
-                   onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
+            <td>
+            <td>
+                <a href="/customers/update?customerId=${tempCustomer.id}" class="btn btn-primary">Update</a>
+            </td>
+            <td>
+                <form:form action="/customers/customer?customerId=${tempCustomer.id}"  method="DELETE">
+                <button type="submit" class="btn btn-danger">DELETE</button>
+                </form:form>
+            </td>
             </td>
         </tr>
     </c:forEach>

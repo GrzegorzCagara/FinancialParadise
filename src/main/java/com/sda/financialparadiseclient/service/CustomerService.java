@@ -18,13 +18,15 @@ public class CustomerService {
     private String financialServiceUrl;
 
     public void addCustomer(Customer customer) throws Exception {
-
         restTemplate.postForObject(financialServiceUrl, customer, String.class);
     }
 
-
     public void updateCustomer(Customer customer) throws Exception {
         restTemplate.put(financialServiceUrl, customer);
+    }
+
+    public void deleteCustomer(int id) throws Exception {
+        restTemplate.delete(financialServiceUrl+ id);
     }
 
     public Customer findCustomerById(int id) throws Exception {

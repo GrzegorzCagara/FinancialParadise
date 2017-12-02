@@ -5,56 +5,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="../resources/css/styles.css"/>
+    <jsp:include page="../resources/css/bootstrap.min.css"/>
     <jsp:include page="../resources/js/scripts.js"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <jsp:include page="../resources/img/admin-panel.png"/>
+    <jsp:include page="../resources/img/add-user.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script type="text/javascript" src="/js/scripts.js"></script>
     <title>All clients</title>
+    <style>
+        .panel {
+            height: 70px;
+            line-height: 50px;
+            vertical-align: middle;
+            background: #ffc107;
+        }
+
+        .fp-logo {
+            color: #1e1e1e;
+            background: #ffc107;
+            border: 2px solid #1e1e1e;
+            font-weight: bold;
+        }
+
+        .fp-logo:hover {
+            color: #1e1e1e;
+            text-decoration: none;
+        }
+
+        .panel-button img {
+            height: 25px;
+        }
+
+        .main-container {
+            margin-top: 50px;
+        }
+
+        .customer-table {
+            word-break: break-all;
+        }
+
+    </style>
 </head>
 <body>
 
-<div class="top-line">
-    <div class="top-left-side"><span class="logo"><a href = "/">Financial Paradise</a></span></div>
-    <div class="top-center-side"><a href ="/customers/find/all"><span class="button">Admin panel</span></a></div>
-    <div class="top-right-side"><a href="/login">Login</a> / <a href="/customers/register">Register</a></div>
+
+<div class="panel panel-default">
+    <div class="container">
+        <div class="d-flex justify-content-end">
+            <div class="mr-auto p-2"><a class="btn fp-logo" href="/">FP</a></div>
+            <div class="p-2"><a class="btn panel-button" href="/customers/customer"><img class="img-fluid" src="/img/add-user.png" alt="add user" /></a></div>
+            <div class="p-2"><a class="btn panel-button" href="/customers/find/all"><img class="img-fluid" src="/img/admin-panel.png" alt="admin panel"/></a></div>
+        </div>
+    </div>
 </div>
 
-<div class="content">
-    <div class="top-center-side"><a href ="/customers/customer"><span class="btn btn-success">Add Customer</span></a></div>
-<table>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Pesel</th>
-        <th>Email</th>
-        <th>Password</th>
-    </tr>
-    <c:forEach var="tempCustomer" items="${customers}">
+
+<div class="container main-container">
+    <table class="table table-striped table-hover customer-table">
+        <thead>
         <tr>
-
-            <td>${tempCustomer.firstName}</td>
-            <td>${tempCustomer.lastName}</td>
-            <td>${tempCustomer.pesel}</td>
-            <td>${tempCustomer.email}</td>
-            <td>${tempCustomer.password}</td>
-            <td>
-            <td>
-                <a href="/customers/update?customerId=${tempCustomer.id}" class="btn btn-primary">Update</a>
-            </td>
-            <td>
-                <form:form action="/customers/customer?customerId=${tempCustomer.id}"  method="DELETE">
-                <button type="submit" class="btn btn-danger">DELETE</button>
-                </form:form>
-            </td>
-            </td>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Pesel</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th colspan="2">Options</th>
         </tr>
-    </c:forEach>
-</table>
+        <thead>
+        <tbody>
+        <c:forEach var="tempCustomer" items="${customers}">
+            <tr>
 
+                <td>${tempCustomer.firstName}</td>
+                <td>${tempCustomer.lastName}</td>
+                <td>${tempCustomer.pesel}</td>
+                <td>${tempCustomer.email}</td>
+                <td>${tempCustomer.password}</td>
+                <td>
+                    <a href="/customers/update?customerId=${tempCustomer.id}" class="btn btn-primary">Update</a>
+                </td>
+                <td>
+                    <form:form action="/customers/customer?customerId=${tempCustomer.id}"  method="DELETE">
+                        <button type="submit" class="btn btn-danger">DELETE</button>
+                    </form:form>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
+
 <%--<p> Add new customer:</p><br>--%>
 <%--<form:form action="/addCustomer" method="post">--%>
     <%--<div align="center">--%>

@@ -3,7 +3,6 @@ package com.sda.financialparadiseclient.controller;
 import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +17,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
+
+    private Customer loggedCustomer;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -58,7 +59,7 @@ public class CustomerController {
     @PutMapping("/customer")
     public String sendUpdatedCustomer(@Valid @ModelAttribute("customer") Customer customer,BindingResult bindingResult) throws Exception {
         if(bindingResult.hasErrors()){
-            return "redirect:/update";
+            return "redirect:/customers/update";
         }
         customerService.updateCustomer(customer);
         return "redirect:/customers/find/all";
@@ -75,6 +76,26 @@ public class CustomerController {
         Customer customer = customerService.findCustomerById(id);
         model.addAttribute(customer);
         return "customer-update-form";
+    }
+
+    @GetMapping("/panel")
+    public String customerPanel(){
+        return "customer-panel";
+    }
+
+    @GetMapping("/panel/payment")
+    public String sendTransfer(Model model){
+        //trzeba zastąpic customera jakąś nowa klasą, która będzie odpowiadać obcej osobie do której wysyłamy przelew,
+        //będzie ona zawierać: id, name, account number, adress(optional)
+        Customer customer = new Customer();
+        model.addAttribute("customer", customer);
+        return "payment-form";
+    }
+
+    @PostMapping("/panel/payment")
+    public String sendATransfer(){
+        //logika do wysłania przelewu
+        return "redirect:/customers/panel";
     }
 
 }

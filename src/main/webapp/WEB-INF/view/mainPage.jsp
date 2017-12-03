@@ -48,6 +48,7 @@
             <a class="text-muted no-underline" href="/customers/find/all">
                 <div class="card">
                     <img class="card-img-top img-fluid" src="/img/admin-panel.png" />
+
                     <div class="card-block">
                         <h3 class="card-title">Admin panel</h3>
                         <p>Manage customers accounts</p>

@@ -21,12 +21,6 @@ public class CustomerController {
     private Customer loggedCustomer;
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
     CustomerService customerService;
 
     @GetMapping("/find/all")
@@ -85,8 +79,10 @@ public class CustomerController {
 
     @GetMapping("/panel/payment")
     public String sendTransfer(Model model){
+
         //todo trzeba zastąpic customera jakąś nowa klasą, która będzie odpowiadać obcej osobie do której wysyłamy przelew,
         //będzie ona zawierać: id, name, account number, adress(optional)
+
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         return "payment-form";

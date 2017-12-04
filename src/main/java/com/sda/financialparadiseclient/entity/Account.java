@@ -15,14 +15,14 @@ public class Account {
     private Integer id;
     private BigDecimal balance;
     private Currency currency;
-    private Customer customer;
 
     public Account() {
     }
 
-    public Account(BigDecimal balance, Currency currency, Customer customer) {
+    public Account(BigDecimal balance, Currency currency) {
         this.balance = balance;
         this.currency = currency;
-        this.customer = customer;
     }
+
+
 }

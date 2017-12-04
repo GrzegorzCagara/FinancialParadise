@@ -1,5 +1,6 @@
 package com.sda.financialparadiseclient.dto;
 
+import com.sda.financialparadiseclient.entity.Account;
 import com.sda.financialparadiseclient.validation.PeselValidator;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,14 +27,8 @@ public class Customer {
     @NotNull
     private String password;
 
-    public Customer() {
-    }
+    private Account account;
 
-    public Customer(String firstName, String lastName, String pesel, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.pesel = pesel;
-        this.email = email;
-        this.password = password;
+    public Customer() {
     }
 }

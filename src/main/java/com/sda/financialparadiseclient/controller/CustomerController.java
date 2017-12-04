@@ -79,8 +79,10 @@ public class CustomerController {
 
     @GetMapping("/panel/payment")
     public String sendTransfer(Model model){
-        //trzeba zastąpic customera jakąś nowa klasą, która będzie odpowiadać obcej osobie do której wysyłamy przelew,
-        //będzie ona zawierać: id, name, account number, adress(optional), title
+
+        //todo trzeba zastąpic customera jakąś nowa klasą, która będzie odpowiadać obcej osobie do której wysyłamy przelew,
+        //będzie ona zawierać: id, name, account number, adress(optional)
+
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         return "payment-form";

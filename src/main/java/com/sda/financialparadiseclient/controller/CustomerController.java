@@ -21,6 +21,9 @@ public class CustomerController {
     private Customer loggedCustomer;
 
     @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    @Autowired
     CustomerService customerService;
 
     @GetMapping("/find/all")
@@ -41,12 +44,14 @@ public class CustomerController {
         return "customer-form";
     }
 
+
     @PostMapping("/customer")
     public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer,BindingResult bindingResult) throws Exception {
         if(bindingResult.hasErrors()){
             return "customer-form";
         }
         customerService.addCustomer(customer);
+        insertRoles(customer.getEmail(), customer.getPassword());
         return "redirect:/customers/find/all";
     }
 
@@ -79,10 +84,6 @@ public class CustomerController {
 
     @GetMapping("/panel/payment")
     public String sendTransfer(Model model){
-
-        //todo trzeba zastąpic customera jakąś nowa klasą, która będzie odpowiadać obcej osobie do której wysyłamy przelew,
-        //będzie ona zawierać: id, name, account number, adress(optional)
-
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         return "payment-form";
@@ -93,5 +94,18 @@ public class CustomerController {
         //logika do wysłania przelewu
         return "redirect:/customers/panel";
     }
+
+    private  void insertRoles(String email, String password){
+        String sqluser =
+                String.format("INSERT INTO users (email, password, enabled) VALUES ('%s', '%s', true)",
+                        email, password);
+        jdbcTemplate.execute(sqluser);
+        String sqlrole =
+                String.format("INSERT INTO user_roles (email, role) VALUES ('%s', '%s')",
+                        email, "ROLE_USER");
+        jdbcTemplate.execute(sqlrole);
+    }
+
+
 
 }

@@ -24,13 +24,16 @@ public class TransferHistory {
 
     private BigDecimal amount;
 
+    private String title;
+
     public TransferHistory() {
     }
 
-    public TransferHistory(String bankAccountNumberFrom, String bankAccountNumberTo, LocalDateTime date, BigDecimal amount) {
+    public TransferHistory(String bankAccountNumberFrom, String bankAccountNumberTo, LocalDateTime date, BigDecimal amount, String title) {
         this.bankAccountNumberFrom = bankAccountNumberFrom;
         this.bankAccountNumberTo = bankAccountNumberTo;
         this.date = date;
         this.amount = amount;
+        this.title = title;
     }
 }

@@ -30,5 +30,6 @@ public class Customer {
     private Account account;
 
     public Customer() {
+        account = Account.getAccount();
     }
 }

@@ -1,6 +1,6 @@
 package com.sda.financialparadiseclient.dto;
 
-import com.sda.financialparadiseclient.entity.Account;
+import com.sda.financialparadiseclient.validation.EmailValidator;
 import com.sda.financialparadiseclient.validation.PeselValidator;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +23,7 @@ public class Customer {
     @PeselValidator
     private String pesel;
     @NotNull
+    @EmailValidator
     private String email;
     @NotNull
     private String password;

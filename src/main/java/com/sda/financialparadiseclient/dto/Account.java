@@ -1,7 +1,6 @@
-package com.sda.financialparadiseclient.entity;
+package com.sda.financialparadiseclient.dto;
 
 import com.sda.financialparadiseclient.Currency;
-import com.sda.financialparadiseclient.dto.Customer;
 import lombok.Getter;
 import lombok.Setter;
 import java.math.BigDecimal;

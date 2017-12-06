@@ -87,7 +87,7 @@
             <tr>
                 <td><label>Email:</label></td>
                 <td><form:input path="email"/></td>
-                <form:errors path="lastName" cssClass="error"/>
+                <form:errors path="email" cssClass="error"/>
 
             </tr>
             <tr>

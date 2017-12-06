@@ -52,9 +52,11 @@
 <div class="panel panel-default">
     <div class="container">
         <div class="d-flex justify-content-end">
-            <div class="mr-auto p-2"><a class="btn fp-logo" href="/">FP</a></div>
+            <div class="mr-auto p-2"><a class="btn fp-logo" href="/admin/panel">FP</a></div>
+            <div class="p-2"><c:if test="${pageContext.request.userPrincipal.name != null}">${pageContext.request.userPrincipal.name}</c:if></div>
             <div class="p-2"><a class="btn panel-button" href="/customers/customer"><img class="img-fluid" src="/img/add-user.png" alt="add user" /></a></div>
             <div class="p-2"><a class="btn panel-button" href="/customers/find/all"><img class="img-fluid" src="/img/admin-panel.png" alt="admin panel"/></a></div>
+            <div class="p-2"><a class="btn panel-button" href="<c:url value="/logout" />"><img class="img-fluid" src="/img/logout.png" alt="logout"/></a></div>
         </div>
     </div>
 </div>
@@ -93,10 +95,6 @@
         </c:forEach>
         </tbody>
     </table>
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <h2>Welcome : ${pageContext.request.userPrincipal.name}
-            | <a href="<c:url value="/logout" />" > Logout</a></h2>
-    </c:if>
 </div>
 
 <%--<p> Add new customer:</p><br>--%>

@@ -38,10 +38,6 @@ public class CustomerController {
         return "customers";
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "redirect:/customers/find/all";
-    }
 
     @GetMapping("/logout")
     public String logout(){

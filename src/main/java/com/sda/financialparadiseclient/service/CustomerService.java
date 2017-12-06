@@ -1,6 +1,8 @@
 package com.sda.financialparadiseclient.service;
 
 import com.sda.financialparadiseclient.dto.Customer;
+import com.sda.financialparadiseclient.dto.CustomerWithTransferReceiver;
+import com.sda.financialparadiseclient.dto.TransferReceiver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,15 @@ public class CustomerService {
 
     public Customer findCustomerById(int id) throws Exception {
         Customer customer = restTemplate.getForObject(financialServiceUrl  + id, Customer.class);
+        return customer;
+    }
+
+    public void sendMoney(CustomerWithTransferReceiver customerWithTransferReceiver) {
+        restTemplate.postForObject("http://localhost:8081/v1/transfer", customerWithTransferReceiver, String.class);
+    }
+
+    public Customer findCustomerByEmail(String email){
+        Customer customer = restTemplate.getForObject(financialServiceUrl  +"/send"+ email, Customer.class);
         return customer;
     }
 }

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Setter
 public class TransferReceiver {
 
-    private Integer id;
+
     private String name;
     private String bankAccountNumber;
     private String title;

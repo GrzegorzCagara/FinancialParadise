@@ -1,6 +1,8 @@
 package com.sda.financialparadiseclient.controller;
 
 import com.sda.financialparadiseclient.dto.Customer;
+import com.sda.financialparadiseclient.dto.CustomerWithTransferReceiver;
+import com.sda.financialparadiseclient.dto.TransferReceiver;
 import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -86,21 +89,25 @@ public class CustomerController {
         return "customer-update-form";
     }
 
-    @GetMapping("/panel")
+        @GetMapping("/panel")
     public String customerPanel(){
         return "customer-panel";
     }
 
     @GetMapping("/panel/payment")
     public String sendTransfer(Model model){
-        Customer customer = new Customer();
-        model.addAttribute("customer", customer);
+        TransferReceiver transferReceiver = new TransferReceiver();
+        model.addAttribute("transferReceiver", transferReceiver);
         return "payment-form";
     }
 
     @PostMapping("/panel/payment")
-    public String sendATransfer(){
-        //logika do wysłania przelewu
+    public String sendATransfer(@ModelAttribute TransferReceiver transferReceiver,
+                                HttpServletRequest httpServletRequest){
+        String email = httpServletRequest.getUserPrincipal().getName();
+        Customer customerFrom = customerService.findCustomerByEmail(email);
+        CustomerWithTransferReceiver customerWithTransferReceiver = new CustomerWithTransferReceiver(customerFrom, transferReceiver);
+        customerService.sendMoney(customerWithTransferReceiver);
         return "redirect:/customers/panel";
     }
 

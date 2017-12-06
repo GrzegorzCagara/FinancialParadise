@@ -65,17 +65,25 @@
 
 <div class="container main-container">
     <h3>Save Customer</h3>
-    <form:form action="/customers/payment" modelAttribute="customer" method="POST">
-        <form:hidden path="id"/>
+    <form:form action="/customers/panel/payment" modelAttribute="transferReceiver" method="POST">
+
         <table class="table customer-table">
             <tbody>
             <tr>
                 <td><label>Name:</label></td>
-                <td><form:input path="firstName"/></td>
+                <td><form:input path="name"/></td>
             </tr>
             <tr>
                 <td><label>Account number:</label></td>
-                <td><form:input path="lastName"/></td>
+                <td><form:input path="bankAccountNumber"/></td>
+            </tr>
+            <tr>
+                <td><label>Title:</label></td>
+                <td><form:input path="title"/></td>
+            </tr>
+            <tr>
+                <td><label>Amount:</label></td>
+                <td><form:input path="amount"/></td>
             </tr>
 
             <tr>

@@ -65,31 +65,16 @@
 
 <div class="container main-container">
     <h3>Save Customer</h3>
-    <form:form action="/customers/panel/payment/confirm" modelAttribute="transferReceiver" method="GET">
+    <form:form action="/customers/panel/payment/confirm"   method="POST">
 
         <table class="table customer-table">
             <tbody>
             <tr>
-                <td><label>Name:</label></td>
-                <td><form:input path="name"/></td>
-            </tr>
-            <tr>
-                <td><label>Account number:</label></td>
-                <td><form:input path="bankAccountNumber"/></td>
-            </tr>
-            <tr>
-                <td><label>Title:</label></td>
-                <td><form:input path="title"/></td>
-            </tr>
-            <tr>
-                <td><label>Amount:</label></td>
-                <td><form:input path="amount"/></td>
+                <td>SMS Code</td>
+                <td><input type="text" name="code"></input></td>
             </tr>
 
-            <tr>
-                <td><label></label></td>
-                <td><input type="submit" value="Send" class="btn btn-warning"></td>
-            </tr>
+            <td><input type="submit"></input></td>
             </tbody>
         </table>
     </form:form>

@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -34,6 +33,16 @@ public class CustomerController {
         List<Customer> userList = customerService.findAllCustomers();
         modelMap.addAttribute("customers", userList);
         return "customers";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "redirect:/customers/find/all";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        return "redirect:/";
     }
 
 

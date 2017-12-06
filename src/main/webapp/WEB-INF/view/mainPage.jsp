@@ -66,6 +66,7 @@
                     </div>
                 </div>
             </a>
+            <a href="<c:url value="/customers/login"/>" class="btn btn-primary">Login</a>
         </div>
     </div>
 </div>

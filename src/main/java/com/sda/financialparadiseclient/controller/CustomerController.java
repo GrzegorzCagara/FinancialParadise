@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -35,10 +36,6 @@ public class CustomerController {
         return "customers";
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "redirect:/customers/find/all";
-    }
 
     @GetMapping("/logout")
     public String logout(){

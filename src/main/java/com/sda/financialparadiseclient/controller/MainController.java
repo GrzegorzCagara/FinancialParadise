@@ -1,6 +1,8 @@
 package com.sda.financialparadiseclient.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,7 +19,9 @@ public class MainController {
             return "mainPage";
         }
 
+
         String user = userPrincipal.getName();
+
 
         if(!user.equals("admin")) {
             return "customer-panel";

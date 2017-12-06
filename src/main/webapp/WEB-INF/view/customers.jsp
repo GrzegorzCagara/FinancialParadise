@@ -95,7 +95,6 @@
         </c:forEach>
         </tbody>
     </table>
-
 </div>
 
 <%--<p> Add new customer:</p><br>--%>

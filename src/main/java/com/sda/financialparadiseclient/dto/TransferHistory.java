@@ -1,4 +1,4 @@
-package com.sda.financialparadiseclient.entity;
+package com.sda.financialparadiseclient.dto;
 
 
 import lombok.Getter;

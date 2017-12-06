@@ -1,6 +1,6 @@
 package com.sda.financialparadiseclient;
 
-import com.sda.financialparadiseclient.entity.Account;
+import com.sda.financialparadiseclient.dto.Account;
 import org.junit.Before;
 import org.junit.Test;
 

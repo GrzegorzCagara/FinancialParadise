@@ -5,13 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="../resources/css/bootstrap.min.css"/>
     <jsp:include page="../resources/js/scripts.js"/>
     <jsp:include page="../resources/img/admin-panel.png"/>
     <jsp:include page="../resources/img/add-user.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script type="text/javascript" src="/js/scripts.js"></script>
-    <title>All clients</title>
+    <title>Save Customer</title>
     <style>
         .panel {
             height: 70px;
@@ -44,15 +43,19 @@
             word-break: break-all;
         }
 
+        .error {
+            color: red;
+        }
+
     </style>
+
 </head>
 <body>
-
 
 <div class="panel panel-default">
     <div class="container">
         <div class="d-flex justify-content-end">
-            <div class="mr-auto p-2"><a class="btn fp-logo" href="/admin/panel">FP</a></div>
+            <div class="mr-auto p-2"><a class="btn fp-logo" href="/">FP</a></div>
             <div class="p-2"><c:if test="${pageContext.request.userPrincipal.name != null}">${pageContext.request.userPrincipal.name}</c:if></div>
             <div class="p-2"><a class="btn panel-button" href="/customers/customer"><img class="img-fluid" src="/img/add-user.png" alt="add user" /></a></div>
             <div class="p-2"><a class="btn panel-button" href="/customers/find/all"><img class="img-fluid" src="/img/admin-panel.png" alt="admin panel"/></a></div>
@@ -63,52 +66,44 @@
 
 
 <div class="container main-container">
-    <table class="table table-striped table-hover customer-table">
-        <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Pesel</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th colspan="2">Options</th>
-        </tr>
-        <thead>
-        <tbody>
-        <c:forEach var="tempCustomer" items="${customers}">
+    <h3>Save Customer</h3>
+    <form:form action="/customers/customer" modelAttribute="customer" method="POST">
+        <form:hidden path="id"/>
+        <table class="table customer-table">
+            <tbody>
             <tr>
-
-                <td>${tempCustomer.firstName}</td>
-                <td>${tempCustomer.lastName}</td>
-                <td>${tempCustomer.pesel}</td>
-                <td>${tempCustomer.email}</td>
-                <td>${tempCustomer.password}</td>
-                <td>
-                    <a href="/customers/update?customerId=${tempCustomer.id}" class="btn btn-primary">Update</a>
-                </td>
-                <td>
-                    <form:form action="/customers/customer?customerId=${tempCustomer.id}"  method="DELETE">
-                        <button type="submit" class="btn btn-danger">DELETE</button>
-                    </form:form>
-                </td>
+                <td><label>First name:</label></td>
+                <td><form:input path="firstName"/></td>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
+            <tr>
+                <td><label>Last name:</label></td>
+                <td><form:input path="lastName"/></td>
+            </tr>
+            <tr>
+                <td><label>Pesel:</label></td>
+                <td><form:input path="pesel"/>
+                    <form:errors path="pesel" cssClass="error"/>
+                </td>
 
-<%--<p> Add new customer:</p><br>--%>
-<%--<form:form action="/addCustomer" method="post">--%>
-    <%--<div align="center">--%>
-        <%--First Name: <input name="firstName" type="text"/><br>--%>
-        <%--Last Name: <input name="lastName" type="text"/><br>--%>
-        <%--Pesel: <input name="pesel" type="text"/><br>--%>
-        <%--<form:errors path="pesel"/>--%>
-        <%--Email: <input name="email" type="text"/><br>--%>
-        <%--Password: <input name="password" type="text"/><br>--%>
-        <%--<input type="submit">--%>
-    <%--</div>--%>
-<%--</form:form>--%>
+            </tr>
+            <tr>
+                <td><label>Email:</label></td>
+                <td><form:input path="email"/></td>
+                <form:errors path="email" cssClass="error"/>
+
+            </tr>
+            <tr>
+                <td><label>Password:</label></td>
+                <td><form:input path="password"/></td>
+            </tr>
+            <tr>
+                <td><label></label></td>
+                <td><input type="submit" value="Save" class="btn btn-warning"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form:form>
+</div>
 
 </body>
 </html>

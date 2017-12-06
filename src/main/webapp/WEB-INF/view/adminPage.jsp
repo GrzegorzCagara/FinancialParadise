@@ -10,7 +10,7 @@
     <jsp:include page="../resources/js/scripts.js"/>
     <jsp:include page="../resources/img/admin-panel.png"/>
     <jsp:include page="../resources/img/add-user.png"/>
-    <jsp:include page="../resources/img/login.png"/>
+    <jsp:include page="../resources/img/logout.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script type="text/javascript" src="/js/scripts.js"></script>
     <style>
@@ -46,12 +46,35 @@
 <div class="container text-muted">
     <div class="row text-center">
         <div class="col-md-3">
-            <a class="text-muted no-underline" href="<c:url value="/login"/>">
+            <a class="text-muted no-underline" href="/customers/find/all">
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="/img/login.png" />
+                    <img class="card-img-top img-fluid" src="/img/admin-panel.png" />
 
                     <div class="card-block">
-                        <h3 class="card-title">Login</h3>
+                        <h3 class="card-title">Admin panel</h3>
+                        <p>Manage customers accounts</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="text-muted no-underline" href="/customers/customer">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="/img/add-user.png" />
+                    <div class="card-block">
+                        <h3 class="card-title">Add user</h3>
+                        <p>Add new customer</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="text-muted no-underline" href="<c:url value="/logout" />">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="/img/logout.png" />
+                    <div class="card-block">
+                        <h3 class="card-title">Logout</h3>
+                        <p>back to main page</p>
                     </div>
                 </div>
             </a>

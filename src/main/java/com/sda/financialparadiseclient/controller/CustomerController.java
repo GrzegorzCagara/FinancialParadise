@@ -1,5 +1,6 @@
 package com.sda.financialparadiseclient.controller;
 
+import com.sda.financialparadiseclient.config.SMSConfiguration;
 import com.sda.financialparadiseclient.config.SMSSender;
 import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.dto.CustomerWithTransferReceiver;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -23,6 +25,7 @@ import java.util.Random;
 @RequestMapping("/customers")
 public class CustomerController {
 
+    private HashMap<String, String> phoneNumbers = SMSConfiguration.getPhoneNumbers();
     private String CODE_NUMBER;
 
     @Autowired
@@ -114,7 +117,8 @@ public class CustomerController {
     public String confirmSMS(@ModelAttribute("transferReceiver") TransferReceiver transferReceiver,
                              HttpServletRequest request){
         request.getSession().setAttribute("transferReceiver",transferReceiver);
-        sendSMS();
+        String email = request.getUserPrincipal().getName();
+        sendSMS(email);
         return "payment-form-confirm";
     }
 
@@ -143,10 +147,11 @@ public class CustomerController {
         jdbcTemplate.execute(sqlrole);
     }
 
-    private void sendSMS(){
+    private void sendSMS(String email){
         CODE_NUMBER = generateVerificationCode();
         String body = "Your veryfication code is: " + CODE_NUMBER;
-        SMSSender.sendMessage(body, "+48888760776");
+        String phoneNumber = phoneNumbers.get(email);
+        SMSSender.sendMessage(body, phoneNumber);
     }
 
     private String generateVerificationCode(){

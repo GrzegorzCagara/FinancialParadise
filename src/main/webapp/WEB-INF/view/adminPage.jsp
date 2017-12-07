@@ -79,6 +79,17 @@
                 </div>
             </a>
         </div>
+        <div class="col-md-3">
+            <a class="text-muted no-underline" href="<c:url value="/admin/customer-detail" />">
+                <div class="card">
+
+                    <div class="card-block">
+                        <h3 class="card-title">Customer details</h3>
+                        <p>back to main page</p>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 

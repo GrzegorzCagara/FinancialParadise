@@ -64,7 +64,7 @@
 
 
 <div class="container main-container">
-    <h3>Save Customer</h3>
+    <h3>Send Money</h3>
     <form:form action="/customers/panel/payment/confirm" modelAttribute="transferReceiver" method="GET">
 
         <table class="table customer-table">

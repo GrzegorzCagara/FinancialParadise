@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Random;
@@ -111,15 +112,26 @@ public class CustomerController {
     }
 
     @GetMapping("/panel/payment/confirm")
-    public String confirmSMS(Model model){
+    public String confirmSMS(@ModelAttribute("transferReceiver") TransferReceiver transferReceiver,
+                             HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            session = request.getSession();
+        }
+
+        session.setAttribute("transferReceiver", transferReceiver);
         sendSMS();
+
 
 
         return "payment-form-confirm";
     }
 
     @PostMapping("/panel/payment/confirm")
-    public String confirmSMSCode(@RequestParam("code") String yourCode, Model model){
+    public String confirmSMSCode(@ModelAttribute("transferReceiver") TransferReceiver transferReceiver,
+                                 @RequestParam("code") String yourCode, Model model, HttpServletRequest request){
+
+        System.out.println("----> " + transferReceiver.getName());
         String codeFromSms = CODE_NUMBER;
         if (codeFromSms.equals(yourCode)){
             System.out.println("HURA TWOJ KOD JEST POPRAWNY");
@@ -144,7 +156,7 @@ public class CustomerController {
     private void sendSMS(){
         String code = CODE_NUMBER;
         String body = "Your veryfication code is: " + code;
-        SMSSender.sendMessage(body, "+48737460483");
+        SMSSender.sendMessage(body, "+48888760776");
     }
 
     private  String randomCode(){
@@ -155,6 +167,12 @@ public class CustomerController {
         }
         return randomCode;
     }
+
+//    @GetMapping("/panel/history")
+//    public String historyTransfer(ModelMap model){
+//        List<TransferHistory> historyList = customerService.findAllTransferHistoryForSpecificAccount();
+//
+//    }
 
 
 

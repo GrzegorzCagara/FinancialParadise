@@ -2,13 +2,12 @@ package com.sda.financialparadiseclient.service;
 
 import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.dto.CustomerWithTransferReceiver;
-import com.sda.financialparadiseclient.dto.TransferReceiver;
+import com.sda.financialparadiseclient.dto.TransferHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.List;
 
 @Service
@@ -50,4 +49,11 @@ public class CustomerService {
         Customer customer = restTemplate.getForObject(financialServiceUrl  +"/send"+ email, Customer.class);
         return customer;
     }
+
+    public List<TransferHistory> findAllTransferHistoryForSpecificAccount(String accountNumber) throws Exception {
+        List<TransferHistory> historyList = restTemplate.getForObject(financialServiceUrl + "/history/list" + accountNumber, List.class);
+        return historyList;
+    }
+
+
 }

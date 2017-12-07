@@ -1,7 +1,9 @@
 package com.sda.financialparadiseclient.controller;
 
+import com.sda.financialparadiseclient.config.SMSSender;
 import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.dto.CustomerWithTransferReceiver;
+import com.sda.financialparadiseclient.dto.TransferHistory;
 import com.sda.financialparadiseclient.dto.TransferReceiver;
 import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
 
-    private Customer loggedCustomer;
+    private  String CODE_NUMBER = randomCode();
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -85,7 +88,7 @@ public class CustomerController {
         return "customer-update-form";
     }
 
-        @GetMapping("/panel")
+    @GetMapping("/panel")
     public String customerPanel(){
         return "customer-panel";
     }
@@ -97,14 +100,36 @@ public class CustomerController {
         return "payment-form";
     }
 
-    @PostMapping("/panel/payment")
-    public String sendATransfer(@ModelAttribute TransferReceiver transferReceiver,
-                                HttpServletRequest httpServletRequest){
-        String email = httpServletRequest.getUserPrincipal().getName();
+    @GetMapping(value = "/panel/payment/final")
+    public String sendATransfer(HttpServletRequest request){
+        TransferReceiver tr = (TransferReceiver) request.getSession().getAttribute("transferReceiver");
+        String email = request.getUserPrincipal().getName();
         Customer customerFrom = customerService.findCustomerByEmail(email);
-        CustomerWithTransferReceiver customerWithTransferReceiver = new CustomerWithTransferReceiver(customerFrom, transferReceiver);
+        CustomerWithTransferReceiver customerWithTransferReceiver = new CustomerWithTransferReceiver(customerFrom, tr);
         customerService.sendMoney(customerWithTransferReceiver);
-        return "redirect:/customers/panel";
+        return "redirect:/customers/panel/payment/successfull";
+    }
+
+    @PostMapping("/panel/payment/confirm")
+    public String confirmSMS(@ModelAttribute("transferReceiver") TransferReceiver transferReceiver,
+                             HttpServletRequest request){
+        request.getSession().setAttribute("transferReceiver",transferReceiver);
+        sendSMS();
+        return "payment-form-confirm";
+    }
+
+    @PostMapping("/panel/payment/confirm-sms")
+    public String confirmSMSCode(@RequestParam("code") String yourCode, Model model, HttpServletRequest request){
+       TransferReceiver tr = (TransferReceiver) request.getSession().getAttribute("transferReceiver");
+       request.getSession().setAttribute("transferReceiver", tr);
+       //request.getSession().setAttribute("transferReceiver", null);
+        String codeFromSms = CODE_NUMBER;
+        if (codeFromSms.equals(yourCode)){
+            model.addAttribute("transferReceiver");
+            return "redirect:/customers/panel/payment/final";
+        } else{
+            return "redirect:/customers/panel/payment/wrong-sms-code";
+        }
     }
 
     private  void insertRoles(String email, String password){
@@ -116,6 +141,40 @@ public class CustomerController {
                 String.format("INSERT INTO user_roles (email, role) VALUES ('%s', '%s')",
                         email, "ROLE_USER");
         jdbcTemplate.execute(sqlrole);
+    }
+
+    private void sendSMS(){
+        String code = CODE_NUMBER;
+        String body = "Your veryfication code is: " + code;
+        SMSSender.sendMessage(body, "+48737460483");
+    }
+
+    private  String randomCode(){
+        Random random = new Random();
+        String randomCode = "";
+        for (int i = 0; i < 5; i ++){
+            randomCode += random.nextInt(10);
+        }
+        return randomCode;
+    }
+
+    @GetMapping("/panel/history")
+    public String historyTransfer(ModelMap model, HttpServletRequest httpServletRequest) throws Exception {
+        String email = httpServletRequest.getUserPrincipal().getName();
+        Customer customer = customerService.findCustomerByEmail(email);
+        List<TransferHistory> historyList = customerService.findAllTransferHistoryForSpecificAccount(customer.getAccount().getBankAccountNumber());
+        model.addAttribute("historyList", historyList);
+        return "transfer-history-list";
+    }
+
+    @GetMapping("/panel/payment/successfull")
+    public String successfullTransfer(){
+        return "successfull";
+    }
+
+    @GetMapping("/panel/payment/wrong-sms-code")
+    public String badSmsCode(){
+        return "bad-sms-code";
     }
 
 

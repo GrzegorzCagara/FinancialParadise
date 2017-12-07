@@ -23,7 +23,7 @@ import java.util.Random;
 @RequestMapping("/customers")
 public class CustomerController {
 
-    private  String CODE_NUMBER = randomCode();
+    private String CODE_NUMBER;
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -144,15 +144,15 @@ public class CustomerController {
     }
 
     private void sendSMS(){
-        String code = CODE_NUMBER;
-        String body = "Your veryfication code is: " + code;
-        SMSSender.sendMessage(body, "+48737460483");
+        CODE_NUMBER = generateVerificationCode();
+        String body = "Your veryfication code is: " + CODE_NUMBER;
+        SMSSender.sendMessage(body, "+48888760776");
     }
 
-    private  String randomCode(){
+    private String generateVerificationCode(){
         Random random = new Random();
         String randomCode = "";
-        for (int i = 0; i < 5; i ++){
+        for (int i = 0; i < 6; i ++){
             randomCode += random.nextInt(10);
         }
         return randomCode;

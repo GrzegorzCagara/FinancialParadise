@@ -3,6 +3,7 @@ package com.sda.financialparadiseclient.controller;
 import com.sda.financialparadiseclient.config.SMSSender;
 import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.dto.CustomerWithTransferReceiver;
+import com.sda.financialparadiseclient.dto.TransferHistory;
 import com.sda.financialparadiseclient.dto.TransferReceiver;
 import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Random;
@@ -101,7 +101,7 @@ public class CustomerController {
     }
 
     @PostMapping("/panel/payment")
-    public String sendATransfer(@ModelAttribute TransferReceiver transferReceiver,
+    public String sendATransfer(@ModelAttribute("transferReceiver") TransferReceiver transferReceiver,
                                 HttpServletRequest httpServletRequest){
 
         String email = httpServletRequest.getUserPrincipal().getName();
@@ -114,16 +114,7 @@ public class CustomerController {
     @GetMapping("/panel/payment/confirm")
     public String confirmSMS(@ModelAttribute("transferReceiver") TransferReceiver transferReceiver,
                              HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            session = request.getSession();
-        }
-
-        session.setAttribute("transferReceiver", transferReceiver);
         sendSMS();
-
-
-
         return "payment-form-confirm";
     }
 
@@ -168,11 +159,14 @@ public class CustomerController {
         return randomCode;
     }
 
-//    @GetMapping("/panel/history")
-//    public String historyTransfer(ModelMap model){
-//        List<TransferHistory> historyList = customerService.findAllTransferHistoryForSpecificAccount();
-//
-//    }
+    @GetMapping("/panel/history")
+    public String historyTransfer(ModelMap model, HttpServletRequest httpServletRequest) throws Exception {
+        String email = httpServletRequest.getUserPrincipal().getName();
+        Customer customer = customerService.findCustomerByEmail(email);
+        List<TransferHistory> historyList = customerService.findAllTransferHistoryForSpecificAccount(customer.getAccount().getBankAccountNumber());
+        model.addAttribute("historyList", historyList);
+        return "transfer-history-list";
+    }
 
 
 

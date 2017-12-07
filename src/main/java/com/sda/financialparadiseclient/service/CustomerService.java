@@ -51,7 +51,7 @@ public class CustomerService {
     }
 
     public List<TransferHistory> findAllTransferHistoryForSpecificAccount(String accountNumber) throws Exception {
-        List<TransferHistory> historyList = restTemplate.getForObject(financialServiceUrl + "history/list" + accountNumber, List.class);
+        List<TransferHistory> historyList = restTemplate.getForObject(financialServiceUrl + "/history/list" + accountNumber, List.class);
         return historyList;
     }
 

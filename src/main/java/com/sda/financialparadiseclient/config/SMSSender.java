@@ -11,13 +11,10 @@ public class SMSSender {
 
     private static String code;
 
-
         public static void sendMessage(String body, String yourPhoneNumber){
             Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
             Message message = Message
                     .creator(new PhoneNumber(yourPhoneNumber), new PhoneNumber(TWILLO_NUMBER),
                             body).create();
         }
-
-
 }

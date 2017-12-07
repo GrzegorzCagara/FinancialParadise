@@ -65,7 +65,7 @@
 
 <div class="container main-container">
     <h3>Save Customer</h3>
-    <form:form action="/customers/panel/payment/confirm"  method="POST">
+    <form:form action="/customers/panel/payment/confirm-sms"  method="POST">
 
         <table class="table customer-table">
             <tbody>

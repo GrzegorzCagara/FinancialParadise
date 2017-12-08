@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://sargue.net/jsptags/time" prefix="javatime" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,7 +79,7 @@
 
                 <td>${tempCustomer.bankAccountNumberFrom}</td>
                 <td>${tempCustomer.bankAccountNumberTo}</td>
-                <td>${tempCustomer.date}</td>
+                <td><javatime:format value="${tempCustomer.date}" style="MS" /></td>
                 <td>${tempCustomer.amount}</td>
                 <td>${tempCustomer.title}</td>
             </tr>

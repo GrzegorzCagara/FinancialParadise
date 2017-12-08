@@ -66,7 +66,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-                <groupId>org.springframework.security</groupId>
+            <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
             <version>4.2.3.RELEASE</version>
         </dependency>
@@ -97,13 +97,17 @@
             <version>5.4.2.Final</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>7.16.1</version>
+        </dependency>
 
-            <dependency>
-                <groupId>com.twilio.sdk</groupId>
-                <artifactId>twilio</artifactId>
-                <version>7.16.1</version>
-            </dependency>
-
+        <dependency>
+            <groupId>net.sargue</groupId>
+            <artifactId>java-time-jsptags</artifactId>
+            <version>1.1.4</version>
+        </dependency>
     </dependencies>
 
     <build>

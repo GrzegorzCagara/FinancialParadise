@@ -48,9 +48,18 @@
             <a class="text-muted no-underline" href="<c:url value="/login"/>">
                 <div class="card">
                     <img class="card-img-top img-fluid" src="/img/login.png" />
-
                     <div class="card-block">
                         <h3 class="card-title">Login</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="text-muted no-underline" href="/register">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="/img/add-user.png" />
+                    <div class="card-block">
+                        <h3 class="card-title">Register</h3>
                     </div>
                 </div>
             </a>

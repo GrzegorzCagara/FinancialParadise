@@ -26,11 +26,11 @@ public class MainController {
         if(!user.equals("admin")) {
             return "customer-panel";
         }
-        return "adminPage";
+        return "admin-panel";
     }
 
     @RequestMapping("/admin/panel")
     public String adminPanel() {
-        return "adminPage";
+        return "admin-panel";
     }
 }

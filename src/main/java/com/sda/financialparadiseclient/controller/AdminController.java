@@ -19,16 +19,16 @@ public class AdminController {
     @Autowired
     CustomerService customerService;
 
-    @GetMapping("/customer-detail")
+    @GetMapping("/customer-details")
     public String customerDetailsForm(){
-        return "customer-detail-form";
+        return "admin-customer-details-form";
     }
 
-    @PostMapping("/customer-detail")
+    @PostMapping("/customer-details")
     public String customerDetails(@RequestParam("email") String email, Model model){
         Customer customer = customerService.findCustomerByEmail(email);
         if (customer == null){
-            return "customer-details-wrong-email";
+            return "admin-customer-details-wrong-email";
         }
         String result = String.format("ID: %d, First name: %s, Last name: %s, Email: %s, Pesel: %s, Account Number: %s," +
                         "Balance: %s, Currency: %s",
@@ -36,7 +36,7 @@ public class AdminController {
                 customer.getEmail(), customer.getPesel(), customer.getAccount().getBankAccountNumber(),
                 customer.getAccount().getBalance(), customer.getAccount().getCurrency());
         model.addAttribute("result", result);
-        return "customer-detail-show";
+        return "admin-customer-details-show";
     }
 
     @PutMapping("/customer")
@@ -59,13 +59,13 @@ public class AdminController {
     public String updateCustomer(@RequestParam("customerId") int id, Model model) throws Exception {
         Customer customer = customerService.findCustomerById(id);
         model.addAttribute(customer);
-        return "customer-update-form";
+        return "admin-update-customer";
     }
 
     @GetMapping("/find/all")
     public String users(ModelMap modelMap) throws Exception {
         List<Customer> userList = customerService.findAllCustomers();
         modelMap.addAttribute("customers", userList);
-        return "customers";
+        return "admin-customers";
     }
 }

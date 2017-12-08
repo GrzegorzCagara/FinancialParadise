@@ -44,13 +44,13 @@ public class CustomerController {
     public String showForForAdd(Model model) {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
-        return "customer-form";
+        return "customer-register";
     }
 
     @PostMapping("/customer")
     public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
-            return "customer-form";
+            return "customer-register";
         }
         customerService.addCustomer(customer);
         insertRoles(customer.getEmail(), customer.getPassword());
@@ -66,7 +66,7 @@ public class CustomerController {
     public String sendTransfer(Model model) {
         TransferReceiver transferReceiver = new TransferReceiver();
         model.addAttribute("transferReceiver", transferReceiver);
-        return "payment-form";
+        return "customer-payment";
     }
 
     @GetMapping(value = "/panel/payment/final")
@@ -88,7 +88,7 @@ public class CustomerController {
         request.getSession().setAttribute("transferReceiver", transferReceiver);
         String email = request.getUserPrincipal().getName();
         sendSMS(email);
-        return "payment-form-confirm";
+        return "customer-payment-confirm";
     }
 
     @PostMapping("/panel/payment/confirm-sms")
@@ -110,7 +110,7 @@ public class CustomerController {
         Customer customer = customerService.findCustomerByEmail(email);
         List<TransferHistory> historyList = customerService.findAllTransferHistoryForSpecificAccount(customer.getAccount().getBankAccountNumber());
         model.addAttribute("historyList", historyList);
-        return "transfer-history-list";
+        return "customer-transfer-history";
     }
 
     @GetMapping("/panel/payment/successfull")

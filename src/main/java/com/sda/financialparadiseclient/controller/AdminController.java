@@ -35,7 +35,7 @@ public class AdminController {
         if (customer == null){
             return "admin-customer-details-wrong-email";
         }
-        String result = String.format("ID: %d, First name: %s, Last name: %s, Email: %s, Pesel: %s, Account Number: %s," +
+        String result = String.format("ID: %d\n First name: %s\n Last name: %s\n Email: %s\n Pesel: %s\n Account Number: %s\n" +
                         "Balance: %s, Currency: %s",
                 customer.getId(), customer.getFirstName(), customer.getLastName(),
                 customer.getEmail(), customer.getPesel(), customer.getAccount().getBankAccountNumber(),

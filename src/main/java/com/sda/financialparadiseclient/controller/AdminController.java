@@ -19,6 +19,11 @@ public class AdminController {
     @Autowired
     CustomerService customerService;
 
+    @GetMapping("/panel")
+    public String adminPanel() {
+        return "admin-panel";
+    }
+
     @GetMapping("/customer-details")
     public String customerDetailsForm(){
         return "admin-customer-details-form";

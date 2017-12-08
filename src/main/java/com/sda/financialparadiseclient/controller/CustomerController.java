@@ -40,22 +40,22 @@ public class CustomerController {
     }
 
 
-    @GetMapping("/customer")
-    public String showForForAdd(Model model) {
-        Customer customer = new Customer();
-        model.addAttribute("customer", customer);
-        return "customer-register";
-    }
-
-    @PostMapping("/customer")
-    public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) throws Exception {
-        if (bindingResult.hasErrors()) {
-            return "customer-register";
-        }
-        customerService.addCustomer(customer);
-        insertRoles(customer.getEmail(), customer.getPassword());
-        return "redirect:/";
-    }
+//    @GetMapping("/new")
+//    public String showForForAdd(Model model) {
+//        Customer customer = new Customer();
+//        model.addAttribute("customer", customer);
+//        return "customer-register";
+//    }
+//
+//    @PostMapping("/new")
+//    public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) throws Exception {
+//        if (bindingResult.hasErrors()) {
+//            return "customer-register";
+//        }
+//        customerService.addCustomer(customer);
+//        insertRoles(customer.getEmail(), customer.getPassword());
+//        return "redirect:/";
+//    }
 
     @GetMapping("/panel")
     public String customerPanel() {

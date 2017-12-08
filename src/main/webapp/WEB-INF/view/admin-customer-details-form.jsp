@@ -52,12 +52,15 @@
 </head>
 <body>
 
+<!-- ADMIN TOP-LINE -->
 <div class="panel panel-default">
     <div class="container">
         <div class="d-flex justify-content-end">
-            <div class="mr-auto p-2"><a class="btn fp-logo" href="/">FP</a></div>
-            <div class="p-2"><a class="btn panel-button" href="/customers/customer"><img class="img-fluid" src="/img/add-user.png" alt="add user" /></a></div>
-            <div class="p-2"><a class="btn panel-button" href="/admin/find/all"><img class="img-fluid" src="/img/admin-panel.png" alt="admin panel"/></a></div>
+            <div class="mr-auto p-2"><a class="btn fp-logo" href="/admin/panel">FP</a></div>
+            <div class="p-2"><c:if test="${pageContext.request.userPrincipal.name != null}">${pageContext.request.userPrincipal.name}</c:if></div>
+            <div class="p-2"><a class="btn panel-button" href="/register"><img class="img-fluid" src="/img/add-user.png" alt="add user" /></a></div>
+            <div class="p-2"><a class="btn panel-button" href="/customers/find/all"><img class="img-fluid" src="/img/admin-panel.png" alt="admin panel"/></a></div>
+            <div class="p-2"><a class="btn panel-button" href="<c:url value="/logout" />"><img class="img-fluid" src="/img/logout.png" alt="logout"/></a></div>
         </div>
     </div>
 </div>
@@ -65,7 +68,7 @@
 
 <div class="container main-container">
     <h3>Save Customer</h3>
-    <form:form action="/admin/customer-detail"  method="POST">
+    <form:form action="/admin/customer-details"  method="POST">
 
         <table class="table customer-table">
             <tbody>

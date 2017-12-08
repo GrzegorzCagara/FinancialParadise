@@ -43,6 +43,15 @@
             word-break: break-all;
         }
 
+        .circle {
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            vertical-align: middle;
+            border: 2px solid #ffc107;
+            border-radius: 50%;
+            margin: auto;
+        }
     </style>
 </head>
 <body>
@@ -60,9 +69,22 @@
 
 
 <div class="container main-container">
-    <a href="<c:url value="/customers/panel/payment"/>" class="btn btn-primary">Send a transfer</a>
-    <a href="<c:url value="/customers/panel/history"/>" class="btn btn-primary">History transfer</a>
-    <a href="<c:url value="/customers/panel/messages"/>" class="btn btn-primary">Messages</a>
+    <div class="row text-center">
+        <div class="col-md-3">
+            <a href="<c:url value="/customers/panel/payment"/>" class="btn btn-warning">Send a transfer</a>
+            <br><br>
+            <a href="<c:url value="/customers/panel/history"/>" class="btn btn-warning">History transfer</a>
+        </div>
+        <div class="col-md-9">
+            <b>Your account number:</b><br>
+            ${account.bankAccountNumber}
+            <br><br>
+            <div class="circle">
+                <b>Balance:
+                    ${account.balance}</b>
+            </div>
+        </div>
+    </div>
 </div>
 
 

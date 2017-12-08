@@ -46,7 +46,7 @@
 <div class="container text-muted">
     <div class="row text-center">
         <div class="col-md-3">
-            <a class="text-muted no-underline" href="/customers/find/all">
+            <a class="text-muted no-underline" href="/admin/find/all">
                 <div class="card">
                     <img class="card-img-top img-fluid" src="/img/admin-panel.png" />
 

@@ -84,10 +84,10 @@
                 <td>${tempCustomer.email}</td>
                 <td>${tempCustomer.password}</td>
                 <td>
-                    <a href="/customers/update?customerId=${tempCustomer.id}" class="btn btn-primary">Update</a>
+                    <a href="/admin/update?customerId=${tempCustomer.id}" class="btn btn-primary">Update</a>
                 </td>
                 <td>
-                    <form:form action="/customers/customer?customerId=${tempCustomer.id}"  method="DELETE">
+                    <form:form action="/admin/customer?customerId=${tempCustomer.id}"  method="DELETE">
                         <button type="submit" class="btn btn-danger">DELETE</button>
                     </form:form>
                 </td>

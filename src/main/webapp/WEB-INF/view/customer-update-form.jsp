@@ -64,7 +64,7 @@
 
         <div class="container main-container">
             <h3>Save Customer</h3>
-            <form:form action="/customers/customer" modelAttribute="customer" method="PUT">
+            <form:form action="/admin/customer" modelAttribute="customer" method="PUT">
                 <form:hidden path="id"/>
                 <table class="table customer-table">
                     <tbody>
@@ -85,7 +85,7 @@
                         <tr>
                             <td><label>Email:</label></td>
                             <td><form:input path="email"/></td>
-                            <form:errors path="lastName" cssClass="error"/>
+                            <form:errors path="email" cssClass="error"/>
                         </tr>
                         <tr>
                             <td><label>Password:</label></td>

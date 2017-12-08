@@ -27,6 +27,9 @@ public class AdminController {
     @PostMapping("/customer-detail")
     public String customerDetails(@RequestParam("email") String email, Model model){
         Customer customer = customerService.findCustomerByEmail(email);
+        if (customer == null){
+            return "customer-details-wrong-email";
+        }
         String result = String.format("ID: %d, First name: %s, Last name: %s, Email: %s, Pesel: %s, Account Number: %s," +
                         "Balance: %s, Currency: %s",
                 customer.getId(), customer.getFirstName(), customer.getLastName(),

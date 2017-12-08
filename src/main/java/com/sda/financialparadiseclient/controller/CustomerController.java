@@ -73,8 +73,11 @@ public class CustomerController {
     public String sendATransfer(HttpServletRequest request) {
         TransferReceiver tr = (TransferReceiver) request.getSession().getAttribute("transferReceiver");
         String email = request.getUserPrincipal().getName();
+        System.out.println(email);
         Customer customerFrom = customerService.findCustomerByEmail(email);
+        System.out.println(customerFrom.getEmail());
         CustomerWithTransferReceiver customerWithTransferReceiver = new CustomerWithTransferReceiver(customerFrom, tr);
+        System.out.println(customerWithTransferReceiver.getCustomer().getAccount().getBankAccountNumber());
         customerService.sendMoney(customerWithTransferReceiver);
         return "redirect:/customers/panel/payment/successfull";
     }

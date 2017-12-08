@@ -5,10 +5,12 @@ import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RequestMapping("/admin")
 @Controller
@@ -25,6 +27,9 @@ public class AdminController {
     @PostMapping("/customer-detail")
     public String customerDetails(@RequestParam("email") String email, Model model){
         Customer customer = customerService.findCustomerByEmail(email);
+        if (customer == null){
+            return "customer-details-wrong-email";
+        }
         String result = String.format("ID: %d, First name: %s, Last name: %s, Email: %s, Pesel: %s, Account Number: %s," +
                         "Balance: %s, Currency: %s",
                 customer.getId(), customer.getFirstName(), customer.getLastName(),
@@ -32,5 +37,35 @@ public class AdminController {
                 customer.getAccount().getBalance(), customer.getAccount().getCurrency());
         model.addAttribute("result", result);
         return "customer-detail-show";
+    }
+
+    @PutMapping("/customer")
+    public String sendUpdatedCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) throws Exception {
+        if(bindingResult.hasErrors()){
+            int id = customer.getId();
+            return "redirect:/admin/update?customerId="+id;
+        }
+        customerService.updateCustomer(customer);
+        return "redirect:/admin/find/all";
+    }
+
+    @DeleteMapping("/customer")
+    public String deleteCustomer(@RequestParam("customerId") int id) throws Exception {
+        customerService.deleteCustomer(id);
+        return "redirect:/admin/find/all";
+    }
+
+    @GetMapping("/update")
+    public String updateCustomer(@RequestParam("customerId") int id, Model model) throws Exception {
+        Customer customer = customerService.findCustomerById(id);
+        model.addAttribute(customer);
+        return "customer-update-form";
+    }
+
+    @GetMapping("/find/all")
+    public String users(ModelMap modelMap) throws Exception {
+        List<Customer> userList = customerService.findAllCustomers();
+        modelMap.addAttribute("customers", userList);
+        return "customers";
     }
 }

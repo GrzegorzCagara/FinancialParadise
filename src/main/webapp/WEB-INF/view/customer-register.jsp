@@ -65,7 +65,7 @@
 
 <div class="container main-container">
     <h3>Save Customer</h3>
-    <form:form action="/customers/customer" modelAttribute="customer" method="POST">
+    <form:form action="/register" modelAttribute="customer" method="POST">
         <form:hidden path="id"/>
         <table class="table customer-table">
             <tbody>

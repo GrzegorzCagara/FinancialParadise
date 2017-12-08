@@ -2,10 +2,7 @@ package com.sda.financialparadiseclient.controller;
 
 import com.sda.financialparadiseclient.config.SMSConfiguration;
 import com.sda.financialparadiseclient.config.SMSSender;
-import com.sda.financialparadiseclient.dto.Customer;
-import com.sda.financialparadiseclient.dto.CustomerWithTransferReceiver;
-import com.sda.financialparadiseclient.dto.TransferHistory;
-import com.sda.financialparadiseclient.dto.TransferReceiver;
+import com.sda.financialparadiseclient.dto.*;
 import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -58,7 +55,12 @@ public class CustomerController {
 //    }
 
     @GetMapping("/panel")
-    public String customerPanel() {
+    public String customerPanel(Model model, HttpServletRequest httpServletRequest) {
+        String mail = httpServletRequest.getUserPrincipal().getName();
+        Customer customer = customerService.findCustomerByEmail(mail);
+        Account account = customer.getAccount();
+        model.addAttribute("customer", customer);
+        model.addAttribute("account", account);
         return "customer-panel";
     }
 

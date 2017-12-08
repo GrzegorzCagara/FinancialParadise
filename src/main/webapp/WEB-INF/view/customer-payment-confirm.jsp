@@ -65,7 +65,7 @@
 
 
 <div class="container main-container">
-    <h3>Save Customer</h3>
+    <h3>SMS Confirmation</h3>
     <form:form action="/customers/panel/payment/confirm-sms"  method="POST">
 
         <table class="table customer-table">

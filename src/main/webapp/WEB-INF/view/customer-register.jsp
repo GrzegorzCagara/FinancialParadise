@@ -10,7 +10,7 @@
     <jsp:include page="../resources/img/add-user.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script type="text/javascript" src="/js/scripts.js"></script>
-    <title>Save Customer</title>
+    <title>Financial Paradise</title>
     <style>
         .panel {
             height: 70px;
@@ -64,7 +64,7 @@
 
 
 <div class="container main-container">
-    <h3>Save Customer</h3>
+    <h3>Register new account</h3>
     <form:form action="/register" modelAttribute="customer" method="POST">
         <form:hidden path="id"/>
         <table class="table customer-table">

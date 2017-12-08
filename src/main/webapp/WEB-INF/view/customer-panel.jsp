@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="../resources/css/bootstrap.min.css"/>
     <jsp:include page="../resources/js/scripts.js"/>
     <jsp:include page="../resources/img/admin-panel.png"/>
     <jsp:include page="../resources/img/add-user.png"/>

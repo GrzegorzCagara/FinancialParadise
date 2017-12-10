@@ -1,6 +1,6 @@
 package com.sda.financialparadiseclient.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+
 import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.dto.CustomerWithTransferReceiver;
 import com.sda.financialparadiseclient.dto.TransferHistory;
@@ -10,9 +10,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 
 @Service

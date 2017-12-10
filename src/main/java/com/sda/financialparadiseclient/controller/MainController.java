@@ -10,9 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -32,11 +30,7 @@ public class MainController {
         if(userPrincipal == null){
             return "mainPage";
         }
-
-
         String user = userPrincipal.getName();
-
-
         if(!user.equals("admin")) {
             return "redirect:/customers/panel";
         }
@@ -51,7 +45,8 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) throws Exception {
+    public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer,
+                               BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             return "customer-register";
         }

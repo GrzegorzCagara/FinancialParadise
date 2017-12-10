@@ -9,7 +9,6 @@ public class SMSConfiguration {
         phoneNumbers.put("rafafafa", "+48888760776");
         phoneNumbers.put("moler", "+48737460483");
         phoneNumbers.put("filip", "+48665020506");
-
         return phoneNumbers;
     }
 }

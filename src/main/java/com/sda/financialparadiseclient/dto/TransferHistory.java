@@ -7,7 +7,6 @@ import com.sda.financialparadiseclient.handler.LocalDateTimeDeserializer;
 import com.sda.financialparadiseclient.handler.LocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

@@ -5,15 +5,11 @@ import com.sda.financialparadiseclient.config.SMSSender;
 import com.sda.financialparadiseclient.dto.*;
 import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -22,37 +18,17 @@ import java.util.Random;
 @RequestMapping("/customers")
 public class CustomerController {
 
+    @Autowired
+    private CustomerService customerService;
+
     private HashMap<String, String> phoneNumbers = SMSConfiguration.getPhoneNumbers();
     private String CODE_NUMBER;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private CustomerService customerService;
 
     @GetMapping("/logout")
     public String logout() {
         return "redirect:/";
     }
-
-
-//    @GetMapping("/new")
-//    public String showForForAdd(Model model) {
-//        Customer customer = new Customer();
-//        model.addAttribute("customer", customer);
-//        return "customer-register";
-//    }
-//
-//    @PostMapping("/new")
-//    public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) throws Exception {
-//        if (bindingResult.hasErrors()) {
-//            return "customer-register";
-//        }
-//        customerService.addCustomer(customer);
-//        insertRoles(customer.getEmail(), customer.getPassword());
-//        return "redirect:/";
-//    }
 
     @GetMapping("/panel")
     public String customerPanel(Model model, HttpServletRequest httpServletRequest) {
@@ -123,17 +99,6 @@ public class CustomerController {
     @GetMapping("/panel/payment/wrong-sms-code")
     public String badSmsCode() {
         return "bad-sms-code";
-    }
-
-    private void insertRoles(String email, String password) {
-        String sqluser =
-                String.format("INSERT INTO users (email, password, enabled) VALUES ('%s', '%s', true)",
-                        email, password);
-        jdbcTemplate.execute(sqluser);
-        String sqlrole =
-                String.format("INSERT INTO user_roles (email, role) VALUES ('%s', '%s')",
-                        email, "ROLE_USER");
-        jdbcTemplate.execute(sqlrole);
     }
 
     private void sendSMS(String email) {

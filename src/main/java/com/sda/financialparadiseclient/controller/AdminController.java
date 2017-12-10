@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    CustomerService customerService;
+    private CustomerService customerService;
 
     @GetMapping("/panel")
     public String adminPanel() {
@@ -45,7 +44,8 @@ public class AdminController {
     }
 
     @PutMapping("/customer")
-    public String sendUpdatedCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult) throws Exception {
+    public String sendUpdatedCustomer(@Valid @ModelAttribute("customer") Customer customer,
+                                      BindingResult bindingResult) throws Exception {
         if(bindingResult.hasErrors()){
             int id = customer.getId();
             return "redirect:/admin/update?customerId="+id;

@@ -15,7 +15,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
-    
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.jdbcAuthentication().dataSource(dataSource)
@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/customers/*")
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-                .antMatchers("/admin/*")
+                .antMatchers("/admin/*", "/admin/find/all")
                 .access("hasRole('ROLE_ADMIN')")
                 .and().formLogin()
                 .and().logout().logoutSuccessUrl("/")

@@ -1,6 +1,5 @@
 package com.sda.financialparadiseclient.dto;
 
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.sda.financialparadiseclient.handler.LocalDateTimeDeserializer;
 import lombok.Getter;
@@ -12,30 +11,20 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class TransferHistory {
-
+public class SuspiciousTransferHistory {
 
     private Integer id;
-
     private String bankAccountNumberFrom;
-
     private String bankAccountNumberTo;
-
+    private String title;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime date;
-
     private BigDecimal amount;
 
-    private String title;
-
-    public TransferHistory() {
+    public SuspiciousTransferHistory() {
     }
 
-    public TransferHistory(String bankAccountNumberFrom, String bankAccountNumberTo, LocalDateTime date, BigDecimal amount, String title) {
-        this.bankAccountNumberFrom = bankAccountNumberFrom;
-        this.bankAccountNumberTo = bankAccountNumberTo;
-        this.date = date;
-        this.amount = amount;
-        this.title = title;
-    }
+
 }
+
+

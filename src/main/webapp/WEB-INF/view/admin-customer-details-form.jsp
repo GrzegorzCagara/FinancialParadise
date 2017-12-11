@@ -10,7 +10,7 @@
     <jsp:include page="../resources/img/add-user.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script type="text/javascript" src="/js/scripts.js"></script>
-    <title>All clients</title>
+    <title>Save Customer</title>
     <style>
         .panel {
             height: 70px;
@@ -43,25 +43,23 @@
             word-break: break-all;
         }
 
-        .circle {
-            width: 200px;
-            height: 200px;
-            line-height: 200px;
-            vertical-align: middle;
-            border: 2px solid #ffc107;
-            border-radius: 50%;
-            margin: auto;
+        .error {
+            color: red;
         }
+
     </style>
+
 </head>
 <body>
 
-<!-- CUSTOMER TOP-LINE -->
+<!-- ADMIN TOP-LINE -->
 <div class="panel panel-default">
     <div class="container">
         <div class="d-flex justify-content-end">
-            <div class="mr-auto p-2"><a class="btn fp-logo" href="/customers/panel">FP</a></div>
+            <div class="mr-auto p-2"><a class="btn fp-logo" href="/admin/panel">FP</a></div>
             <div class="p-2"><c:if test="${pageContext.request.userPrincipal.name != null}">${pageContext.request.userPrincipal.name}</c:if></div>
+            <div class="p-2"><a class="btn panel-button" href="/register"><img class="img-fluid" src="/img/add-user.png" alt="add user" /></a></div>
+            <div class="p-2"><a class="btn panel-button" href="/admin/find/all"><img class="img-fluid" src="/img/admin-panel.png" alt="admin panel"/></a></div>
             <div class="p-2"><a class="btn panel-button" href="<c:url value="/logout" />"><img class="img-fluid" src="/img/logout.png" alt="logout"/></a></div>
         </div>
     </div>
@@ -69,24 +67,21 @@
 
 
 <div class="container main-container">
-    <div class="row text-center">
-        <div class="col-md-3">
-            <a href="<c:url value="/customers/panel/payment"/>" class="btn btn-warning">Send a transfer</a>
-            <br><br>
-            <a href="<c:url value="/customers/panel/history"/>" class="btn btn-warning">History transfer</a>
-        </div>
-        <div class="col-md-9">
-            <b>Your account number:</b><br>
-            ${account.bankAccountNumber}
-            <br><br>
-            <div class="circle">
-                <b>Balance:
-                    ${account.balance}</b>
-            </div>
-        </div>
-    </div>
-</div>
+    <h3>Search for a customer</h3>
+    <form:form action="/admin/customer-details"  method="POST">
 
+        <table class="table customer-table">
+            <tbody>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="email" /></td>
+            </tr>
+
+            <td><input type="submit" /></td>
+            </tbody>
+        </table>
+    </form:form>
+</div>
 
 </body>
 </html>

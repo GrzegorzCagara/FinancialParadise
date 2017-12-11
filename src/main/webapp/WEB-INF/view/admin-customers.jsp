@@ -49,13 +49,14 @@
 <body>
 
 
+<!-- ADMIN TOP-LINE -->
 <div class="panel panel-default">
     <div class="container">
         <div class="d-flex justify-content-end">
             <div class="mr-auto p-2"><a class="btn fp-logo" href="/admin/panel">FP</a></div>
             <div class="p-2"><c:if test="${pageContext.request.userPrincipal.name != null}">${pageContext.request.userPrincipal.name}</c:if></div>
-            <div class="p-2"><a class="btn panel-button" href="/customers/customer"><img class="img-fluid" src="/img/add-user.png" alt="add user" /></a></div>
-            <div class="p-2"><a class="btn panel-button" href="/customers/find/all"><img class="img-fluid" src="/img/admin-panel.png" alt="admin panel"/></a></div>
+            <div class="p-2"><a class="btn panel-button" href="/register"><img class="img-fluid" src="/img/add-user.png" alt="add user" /></a></div>
+            <div class="p-2"><a class="btn panel-button" href="/admin/find/all"><img class="img-fluid" src="/img/admin-panel.png" alt="admin panel"/></a></div>
             <div class="p-2"><a class="btn panel-button" href="<c:url value="/logout" />"><img class="img-fluid" src="/img/logout.png" alt="logout"/></a></div>
         </div>
     </div>
@@ -84,10 +85,10 @@
                 <td>${tempCustomer.email}</td>
                 <td>${tempCustomer.password}</td>
                 <td>
-                    <a href="/customers/update?customerId=${tempCustomer.id}" class="btn btn-primary">Update</a>
+                    <a href="/admin/update?customerId=${tempCustomer.id}" class="btn btn-primary">Update</a>
                 </td>
                 <td>
-                    <form:form action="/customers/customer?customerId=${tempCustomer.id}"  method="DELETE">
+                    <form:form action="/admin/customer?customerId=${tempCustomer.id}"  method="DELETE">
                         <button type="submit" class="btn btn-danger">DELETE</button>
                     </form:form>
                 </td>
@@ -96,19 +97,5 @@
         </tbody>
     </table>
 </div>
-
-<%--<p> Add new customer:</p><br>--%>
-<%--<form:form action="/addCustomer" method="post">--%>
-    <%--<div align="center">--%>
-        <%--First Name: <input name="firstName" type="text"/><br>--%>
-        <%--Last Name: <input name="lastName" type="text"/><br>--%>
-        <%--Pesel: <input name="pesel" type="text"/><br>--%>
-        <%--<form:errors path="pesel"/>--%>
-        <%--Email: <input name="email" type="text"/><br>--%>
-        <%--Password: <input name="password" type="text"/><br>--%>
-        <%--<input type="submit">--%>
-    <%--</div>--%>
-<%--</form:form>--%>
-
 </body>
 </html>

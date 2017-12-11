@@ -1,14 +1,15 @@
 package com.sda.financialparadiseclient.service;
 
+
 import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.dto.CustomerWithTransferReceiver;
-import com.sda.financialparadiseclient.dto.TransferReceiver;
+import com.sda.financialparadiseclient.dto.TransferHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.net.URI;
 import java.util.List;
 
 @Service
@@ -29,7 +30,7 @@ public class CustomerService {
     }
 
     public void deleteCustomer(int id) throws Exception {
-        restTemplate.delete(financialServiceUrl+ id);
+        restTemplate.delete(financialServiceUrl + id);
     }
 
     public List<Customer> findAllCustomers() throws Exception {
@@ -38,7 +39,7 @@ public class CustomerService {
     }
 
     public Customer findCustomerById(int id) throws Exception {
-        Customer customer = restTemplate.getForObject(financialServiceUrl  + id, Customer.class);
+        Customer customer = restTemplate.getForObject(financialServiceUrl + id, Customer.class);
         return customer;
     }
 
@@ -46,8 +47,17 @@ public class CustomerService {
         restTemplate.postForObject("http://localhost:8081/v1/transfer", customerWithTransferReceiver, String.class);
     }
 
-    public Customer findCustomerByEmail(String email){
-        Customer customer = restTemplate.getForObject(financialServiceUrl  +"/send"+ email, Customer.class);
+    public Customer findCustomerByEmail(String email) {
+        Customer customer = restTemplate.getForObject(financialServiceUrl + "/send" + email, Customer.class);
         return customer;
     }
+
+    public List<TransferHistory> findAllTransferHistoryForSpecificAccount(String accountNumber) throws Exception {
+        ParameterizedTypeReference<List<TransferHistory>> parameterizedTypereference = new ParameterizedTypeReference<List<TransferHistory>>() {
+        };
+        String url = financialServiceUrl + "/history/list" + accountNumber;
+        return restTemplate.exchange(url, HttpMethod.GET, null, parameterizedTypereference).getBody();
+    }
+
+
 }

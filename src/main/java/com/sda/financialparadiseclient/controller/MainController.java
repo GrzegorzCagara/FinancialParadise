@@ -4,6 +4,7 @@ import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
@@ -50,8 +52,11 @@ public class MainController {
         if (bindingResult.hasErrors()) {
             return "customer-register";
         }
+
+        String hashedPassword = hashPassword(customer.getPassword());
+        customer.setPassword(hashedPassword);
         customerService.addCustomer(customer);
-        insertRoles(customer.getEmail(), customer.getPassword());
+        insertRoles(customer.getEmail(), hashedPassword);
         return "redirect:/";
     }
 
@@ -64,5 +69,11 @@ public class MainController {
                 String.format("INSERT INTO user_roles (email, role) VALUES ('%s', '%s')",
                         email, "ROLE_USER");
         jdbcTemplate.execute(sqlrole);
+    }
+
+    private String hashPassword(String password){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
+        return hashedPassword;
     }
 }

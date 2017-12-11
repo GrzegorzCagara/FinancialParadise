@@ -62,7 +62,35 @@
         </div>
 
         <div class="container main-container">
-            ${result}
+            <table class="table table-striped table-hover customer-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Pesel</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>BankAccountNumber</th>
+                    <th>Balance</th>
+                    <th>Currency</th>
+
+                </tr>
+                <thead>
+                <tbody>
+                    <tr>
+                        <td>${customer.id}</td>
+                        <td>${customer.firstName}</td>
+                        <td>${customer.lastName}</td>
+                        <td>${customer.pesel}</td>
+                        <td>${customer.email}</td>
+                        <td>${customer.password}</td>
+                        <td>${account.bankAccountNumber}</td>
+                        <td>${account.balance}</td>
+                        <td>${account.currency}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </body>
 </html>

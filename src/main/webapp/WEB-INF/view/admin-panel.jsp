@@ -90,6 +90,17 @@
                 </div>
             </a>
         </div>
+        <div class="col-md-3">
+            <a class="text-muted no-underline" href="<c:url value="/admin/suspicious-transfers" />">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="/img/logout.png" />
+                    <div class="card-block">
+                        <h3 class="card-title">Suspicious Transfers</h3>
+                        <p>back to main page</p>
+                    </div>
+                </div>
+            </a>
+        </div>
 
     </div>
 </div>

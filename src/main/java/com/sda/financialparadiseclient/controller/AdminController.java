@@ -1,7 +1,9 @@
 package com.sda.financialparadiseclient.controller;
 
 import com.sda.financialparadiseclient.dto.Customer;
+import com.sda.financialparadiseclient.dto.SuspiciousTransferHistory;
 import com.sda.financialparadiseclient.service.CustomerService;
+import com.sda.financialparadiseclient.service.SuspiciousTransferHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ public class AdminController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private SuspiciousTransferHistoryService suspiciousTransferHistoryService;
 
     @GetMapping("/panel")
     public String adminPanel() {
@@ -68,9 +73,16 @@ public class AdminController {
     }
 
     @GetMapping("/find/all")
-    public String users(ModelMap modelMap) throws Exception {
+    public String users(ModelMap model) throws Exception {
         List<Customer> userList = customerService.findAllCustomers();
-        modelMap.addAttribute("customers", userList);
+        model.addAttribute("customers", userList);
         return "admin-customers";
+    }
+
+    @GetMapping("/suspicious-transfers")
+    public String suspiciousTransferHistory(ModelMap model) throws Exception {
+        List<SuspiciousTransferHistory> suspiciousTransferHistoryList = suspiciousTransferHistoryService.findAllSuspiciousTransfers();
+        model.addAttribute("suspiciousTransfers", suspiciousTransferHistoryList);
+        return "admin-suspicious-transfers";
     }
 }

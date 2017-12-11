@@ -1,5 +1,6 @@
 package com.sda.financialparadiseclient.controller;
 
+import com.sda.financialparadiseclient.dto.Account;
 import com.sda.financialparadiseclient.dto.Customer;
 import com.sda.financialparadiseclient.dto.SuspiciousTransferHistory;
 import com.sda.financialparadiseclient.service.CustomerService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -39,12 +41,9 @@ public class AdminController {
         if (customer == null){
             return "admin-customer-details-wrong-email";
         }
-        String result = String.format("ID: %d\n First name: %s\n Last name: %s\n Email: %s\n Pesel: %s\n Account Number: %s\n" +
-                        "Balance: %s, Currency: %s",
-                customer.getId(), customer.getFirstName(), customer.getLastName(),
-                customer.getEmail(), customer.getPesel(), customer.getAccount().getBankAccountNumber(),
-                customer.getAccount().getBalance(), customer.getAccount().getCurrency());
-        model.addAttribute("result", result);
+        Account account  = customer.getAccount();
+        model.addAttribute("customer", customer);
+        model.addAttribute("account", account);
         return "admin-customer-details-show";
     }
 

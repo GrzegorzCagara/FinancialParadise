@@ -37,6 +37,11 @@ public class MainController {
         return "redirect:/admin/panel";
     }
 
+    @GetMapping("/show-my-login-page")
+    public String showMyLoginPage(){
+        return "fancy-login";
+    }
+
     @GetMapping("/register")
     public String showForForAdd(Model model) {
         Customer customer = new Customer();

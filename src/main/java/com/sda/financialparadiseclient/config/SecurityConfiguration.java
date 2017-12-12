@@ -30,7 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
                 .antMatchers("/admin/*", "/admin/find/all")
                 .access("hasRole('ROLE_ADMIN')")
-                .and().formLogin()
+                .and().formLogin().loginPage("/show-my-login-page")
+                .loginProcessingUrl("/authenticate-user")
                 .and().logout().logoutSuccessUrl("/")
                 .and().csrf().disable();
     }

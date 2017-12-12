@@ -45,7 +45,7 @@
 <div class="container text-muted">
     <div class="row text-center">
         <div class="col-md-3">
-            <a class="text-muted no-underline" href="<c:url value="/login"/>">
+            <a class="text-muted no-underline" href="<c:url value="/show-my-login-page"/>">
                 <div class="card">
                     <img class="card-img-top img-fluid" src="/img/login.png" />
                     <div class="card-block">
